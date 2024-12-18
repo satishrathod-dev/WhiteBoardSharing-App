@@ -9,28 +9,23 @@ const JoinRoomForm = ({ uuid, socket, setUser }) => {
   const handleRoomJoin = (e) => {
     e.preventDefault();
 
-    // Check if both name and roomId are provided
     if (!name || !roomId) {
       alert("Please provide both your name and the room code.");
       return;
     }
 
-    // Create the user object with the provided data
     const roomData = {
       name,
       roomId,
-      userId: uuid(), // Using uuid as userId
-      host: false, // Default to not being the host
-      presenter: false, // Default to not being the presenter
+      userId: uuid(),
+      host: false,
+      presenter: false,
     };
 
-    // Set the user in the context
     setUser(roomData);
 
-    // Join the room by emitting the event to the server
     socket.emit("userJoined", roomData);
 
-    // Navigate to the room page after successful connection
     navigate(`/${roomId}`);
   };
 

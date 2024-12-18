@@ -10,7 +10,6 @@ const CreateRoomForm = ({ uuid, socket, setUser }) => {
   const handleCreateRoom = (e) => {
     e.preventDefault();
 
-    // Make sure both name and roomId are provided
     if (!name || !roomId) {
       alert("Please provide both your name and the room code.");
       return;
@@ -19,18 +18,15 @@ const CreateRoomForm = ({ uuid, socket, setUser }) => {
     const roomData = {
       name,
       roomId,
-      userId: uuid(), // Use uuid as userId
-      host: true, // Since the user is creating the room, they are the host
-      presenter: true, // The host can be the presenter (can draw)
+      userId: uuid(),
+      host: true,
+      presenter: true,
     };
 
-    // Set the user data in the state
     setUser(roomData);
 
-    // Emit the room creation to the server via socket
     socket.emit("userJoined", roomData);
 
-    // Navigate to the room page after the room is created
     navigate(`/${roomId}`);
   };
 
@@ -66,7 +62,7 @@ const CreateRoomForm = ({ uuid, socket, setUser }) => {
             <button
               className="btn btn-outline-danger btn-sm me-2"
               type="button"
-              onClick={() => navigator.clipboard.writeText(roomId)} // Copy the roomId to clipboard
+              onClick={() => navigator.clipboard.writeText(roomId)}
             >
               Copy
             </button>

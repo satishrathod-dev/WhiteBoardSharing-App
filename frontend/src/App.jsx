@@ -23,42 +23,6 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [openVideo, setOpenVideo] = useState(true);
 
-  // Removed videoGrid and video-related functions
-
-  // Remove addVideoStream function
-  // const addVideoStream = (div, video, stream) => {
-  //   video.srcObject = stream;
-  //   video.addEventListener("loadedmetadata", () => {
-  //     video.play();
-  //   });
-  //   div.append(video);
-  //   videoGrid.current.append(div);
-  // };
-
-  // Removed connectToNewUser function
-  // const connectToNewUser = (userId, name, stream) => {
-  //   console.log(myPeer, stream);
-  //   const call = myPeer.call(userId, stream);
-  //   console.log("call", call);
-  //   const div = document.createElement("div");
-  //   div.id = userId;
-  //   const video = document.createElement("video");
-  //   const p = document.createElement("p");
-  //   console.log(users);
-  //   p.innerText = name;
-  //   div.append(p);
-  //   call.on("stream", (userVideoStream) => {
-  //     addVideoStream(div, video, userVideoStream);
-  //   });
-  //   call.on("close", () => {
-  //     video.remove();
-  //   });
-
-  //   setPeers((prevPeers) => {
-  //     return { ...prevPeers, [userId]: call };
-  //   });
-  // };
-
   useEffect(() => {
     socket.on("userIsJoined", (data) => {
       if (data.success) {
@@ -76,7 +40,6 @@ const App = () => {
     socket.on("userLeftMessageBroadcasted", (data) => {
       console.log(`${data.name} ${data.userId} left the room`);
       toast.info(`${data.name} left the room`);
-      // You can add other logic here to remove users from the UI if needed
     });
   }, []);
 
@@ -112,7 +75,6 @@ const App = () => {
           path="/:roomId"
           element={
             <>
-              {/* Removed video grid and Open Video button */}
               <RoomPage
                 socket={socket}
                 users={users}
