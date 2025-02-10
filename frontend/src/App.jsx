@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import io from "socket.io-client";
-
+import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 
 import Forms from "./components/Forms";
@@ -22,7 +22,6 @@ const socket = io(server, connectionOptions);
 const App = () => {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
-  const [openVideo, setOpenVideo] = useState(true);
 
   useEffect(() => {
     socket.on("userIsJoined", (data) => {
@@ -44,25 +43,7 @@ const App = () => {
     });
   }, []);
 
-  const uuid = () => {
-    let S4 = () => {
-      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-    };
-    return (
-      S4() +
-      S4() +
-      "-" +
-      S4() +
-      "-" +
-      S4() +
-      "-" +
-      S4() +
-      "-" +
-      S4() +
-      S4() +
-      S4()
-    );
-  };
+  const uuid = uuidv4;
 
   return (
     <div className="container">

@@ -11,6 +11,7 @@ const { addUser, getUser, removeUser } = require("./utils/users");
 const io = new Server(server, {
   cors: {
     origin: "https://white-board-sharing-app.vercel.app/",
+    // origin: ["http://localhost:3000"],
     methods: ["GET", "POST"],
     credentials: true,
   },
