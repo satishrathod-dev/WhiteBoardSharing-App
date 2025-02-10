@@ -8,7 +8,8 @@ import "./App.css";
 import Forms from "./components/Forms";
 import RoomPage from "./pages/RoomPage";
 
-const server = "http://localhost:5000";
+// Websocket connection
+const server = "https://whiteboardsharing-app.onrender.com";
 const connectionOptions = {
   "force new connection": true,
   reconnectionAttempts: "Infinity",

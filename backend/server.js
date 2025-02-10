@@ -1,12 +1,20 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+const path = require("path");
 
 const server = require("http").createServer(app);
 const { Server } = require("socket.io");
 
 const { addUser, getUser, removeUser } = require("./utils/users");
 
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: "https://white-board-sharing-app.vercel.app/",
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
 
 // routes
 app.get("/", (req, res) => {
@@ -73,5 +81,5 @@ io.on("connection", (socket) => {
 const port = process.env.PORT || 5000;
 
 server.listen(port, () =>
-  console.log("server is running on http://localhost:5000")
+  console.log(`Server is running on http://localhost:${port}`)
 );
